@@ -1,0 +1,29 @@
+Imports System
+
+Module Program
+    Class TOH
+        Dim discs As Integer
+        Sub New(ByVal val As Integer)
+            discs = val
+        End Sub
+        Public Sub MoveDiscs(ByVal num As Integer,
+                             ByVal from As Integer,
+                             ByVal tto As Integer,
+                             ByVal other As Integer)
+            If (num > 0) Then
+                MoveDiscs(num - 1, from, other, tto)
+                Console.WriteLine("Move disk {0} from tower {1} to tower {2}", num, from, tto)
+                MoveDiscs(num - 1, other, tto, from)
+            End If
+        End Sub
+    End Class
+    Sub Main(args As String())
+        Dim t As TOH
+        Dim totalDisks As Integer
+        Console.WriteLine("enter the total number of discs: ")
+        totalDisks = Console.ReadLine()
+
+        t = New TOH(totalDisks)
+        t.MoveDiscs(totalDisks, 1, 3, 2)
+    End Sub
+End Module
